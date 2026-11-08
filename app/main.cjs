@@ -14,6 +14,7 @@ app.whenReady().then(()=>{
  win.webContents.setWindowOpenHandler(()=>({action:'deny'}));
  win.webContents.on('will-navigate',(e,url)=>{if(!url.startsWith(pathToFileURL(__dirname+path.sep).href))e.preventDefault()});
  require('./updater.cjs').installIPC({ipcMain,app,win,shell});
+ require('./coop-net.cjs').installIPC(ipcMain,win);
  win.loadFile('index.html');
  win.on('close',e=>{if(!app.closing){e.preventDefault();win.webContents.send('request-save-close');setTimeout(()=>{app.closing=true;app.quit()},250)}});
 });
