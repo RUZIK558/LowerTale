@@ -1,6 +1,6 @@
 {
   "name": "lowertale-build",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "private": true,
   "description": "Build tools for LowerTale release",
   "scripts": {
