@@ -20,3 +20,5 @@
 
 #soundtrack{background:#182338;color:#e1e8ee;border:1px solid #53647d;padding:9px;max-width:230px;font:inherit}
 #trial36{max-width:640px;white-space:normal}
+
+#update-badge44{position:fixed;z-index:110;top:58px;left:50%;transform:translateX(-50%);background:#193044;color:#f4d790;border:1px solid #d5b968;padding:7px 12px;font-size:12px;cursor:pointer;box-shadow:0 2px 12px #0009}#update-badge44.hidden{display:none}
