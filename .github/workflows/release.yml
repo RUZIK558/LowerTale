@@ -1,0 +1,64 @@
+name: Build and publish a test release
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'package.json', '.github/workflows/release.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            command: build:windows
+            asset: release/*.exe
+            label: windows
+          - os: ubuntu-latest
+            command: build:linux
+            asset: release/*.AppImage
+            label: linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npm run ${{ matrix.command }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lowertale-${{ matrix.label }}
+          path: ${{ matrix.asset }}
+          if-no-files-found: error
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: lowertale-*
+          path: release
+          merge-multiple: true
+      - name: Publish release if version is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          v=$(node -p "require('./app/package.json').version")
+          [[ "$v" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          if gh release view "v$v" >/dev/null 2>&1; then
+            echo "Release v$v already exists; leave it unchanged."
+            exit 0
+          fi
+          test -f "release/LowerTale-$v-TEST-Windows-x64-Setup.exe"
+          test -f "release/LowerTale-$v-TEST-x86_64.AppImage"
+          gh release create "v$v" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" --target "$GITHUB_SHA" --title "LowerTale $v — тестовая версия" --notes "Тестовая версия. Подробности и управление — в README-TEST-3.6-RU.txt."
