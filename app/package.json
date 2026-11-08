@@ -1,8 +1,8 @@
 {
   "name": "lowertale-full-version",
   "productName": "LowerTale: Full version",
-  "version": "3.6.0",
-  "description": "The Last Train — 30-chapter story RPG",
+  "version": "3.7.0",
+  "description": "The Last Train \u2014 30-chapter story RPG",
   "main": "main.cjs",
   "author": "LowerTale",
   "license": "UNLICENSED"

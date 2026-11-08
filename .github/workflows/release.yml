@@ -61,4 +61,5 @@ jobs:
           fi
           test -f "release/LowerTale-$v-TEST-Windows-x64-Setup.exe"
           test -f "release/LowerTale-$v-TEST-x86_64.AppImage"
-          gh release create "v$v" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" --target "$GITHUB_SHA" --title "LowerTale $v — тестовая версия" --notes "Тестовая версия. Подробности и управление — в README-TEST-3.6-RU.txt."
+          zip -qr "release/LowerTale-$v-TEST-HTML-source.zip" app
+          gh release create "v$v" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" "release/LowerTale-$v-TEST-HTML-source.zip" --target "$GITHUB_SHA" --title "LowerTale $v — тестовая версия" --notes "Пять типов целей глав, испытания и дополнительные сцены. Управление — в README-TEST-3.7-RU.txt."
