@@ -1,7 +1,7 @@
 const {app,BrowserWindow,Menu,dialog,ipcMain,shell}=require('electron');
 const path=require('path');
 const {pathToFileURL}=require('url');
-app.setName('LowerTale-Test-3.5');
+app.setName('LowerTale');
 // Avoid renderer crashes on Linux hosts with small /dev/shm.
 if(process.platform==='linux')app.commandLine.appendSwitch('disable-dev-shm-usage');
 // AppImages cannot provide a root-owned setuid helper. Chromium sandboxing

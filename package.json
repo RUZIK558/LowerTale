@@ -1,8 +1,8 @@
 {
   "name": "lowertale-build",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "private": true,
-  "description": "Build tools for LowerTale test version",
+  "description": "Build tools for LowerTale release",
   "scripts": {
     "build:windows": "electron-builder --win nsis --x64 --publish never",
     "build:linux": "electron-builder --linux AppImage --x64 --publish never"
@@ -12,8 +12,8 @@
     "electron-builder": "26.0.12"
   },
   "build": {
-    "appId": "org.lowertale.test",
-    "productName": "LowerTale-Test-3.5",
+    "appId": "org.lowertale.full",
+    "productName": "LowerTale",
     "directories": {
       "app": "app",
       "output": "release"
@@ -31,7 +31,7 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "LowerTale-${version}-TEST-Windows-x64-Setup.${ext}"
+      "artifactName": "LowerTale-${version}-Windows-x64-Setup.${ext}"
     },
     "linux": {
       "target": [
@@ -41,7 +41,7 @@
       "category": "Game"
     },
     "appImage": {
-      "artifactName": "LowerTale-${version}-TEST-x86_64.${ext}"
+      "artifactName": "LowerTale-${version}-x86_64.${ext}"
     }
   }
 }

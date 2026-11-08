@@ -1,4 +1,4 @@
-name: Build and publish a test release
+name: Build and publish a release
 on:
   push:
     branches: [main]
@@ -59,7 +59,9 @@ jobs:
             echo "Release v$v already exists; leave it unchanged."
             exit 0
           fi
-          test -f "release/LowerTale-$v-TEST-Windows-x64-Setup.exe"
-          test -f "release/LowerTale-$v-TEST-x86_64.AppImage"
-          zip -qr "release/LowerTale-$v-TEST-HTML-source.zip" app
-          gh release create "v$v" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" "release/LowerTale-$v-TEST-HTML-source.zip" --target "$GITHUB_SHA" --title "LowerTale $v — тестовая версия" --notes "Пять типов целей глав, испытания и дополнительные сцены. Управление — в README-TEST-3.7-RU.txt."
+          test -f "release/LowerTale-$v-Windows-x64-Setup.exe"
+          test -f "release/LowerTale-$v-x86_64.AppImage"
+          zip -qr "release/LowerTale-$v-HTML-source.zip" app
+          cp "release/LowerTale-$v-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe"
+          cp "release/LowerTale-$v-x86_64.AppImage" "release/LowerTale-$v-TEST-x86_64.AppImage"
+          gh release create "v$v" "release/LowerTale-$v-Windows-x64-Setup.exe" "release/LowerTale-$v-x86_64.AppImage" "release/LowerTale-$v-HTML-source.zip" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" --target "$GITHUB_SHA" --title "LowerTale $v — релиз" --notes "Релизная кампания: главы открываются по мере прохождения; сохранения тестовой версии отдельные. Подробности — в README-RELEASE-RU.txt. Файлы TEST — совместимость обновления с тестовой версией 3.7; их содержимое совпадает с релизными."
