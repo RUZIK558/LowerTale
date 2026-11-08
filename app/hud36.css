@@ -15,3 +15,5 @@
 .rescue-grid37{display:grid;grid-template-columns:repeat(3,64px);gap:8px;margin:16px 0}.rescue-grid37 button{font-size:25px;min-height:54px;color:#a8bfc9}.rescue-grid37 .rescue-on37{color:#ff9d94;border-color:#dd817b;background:#3b252d}
 
 #rpg-hud39{color:#a8ded1;font-size:10px;line-height:1.3}#rpg-hud39:empty{display:none}
+
+.pulse-grid40{display:grid;grid-template-columns:repeat(4,58px);gap:6px;margin:12px 0}.pulse-grid40 button{min-height:48px;font-size:24px;color:#73909d}.pulse-grid40 .pulse-on40{background:#423329;border-color:#e9bc6a;color:#f7d784}
