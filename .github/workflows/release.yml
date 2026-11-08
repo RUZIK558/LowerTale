@@ -14,7 +14,9 @@ jobs:
         include:
           - os: windows-latest
             command: build:windows
-            asset: release/*.exe
+            asset: |
+              release/*.exe
+              release/*.asar
             label: windows
           - os: ubuntu-latest
             command: build:linux
@@ -30,6 +32,13 @@ jobs:
       - run: npm run ${{ matrix.command }}
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Package Windows in-app update
+        if: matrix.label == 'windows'
+        shell: bash
+        run: |
+          v=$(node -p "require('./app/package.json').version")
+          e=$(node -p "require('./package.json').devDependencies.electron")
+          cp release/win-unpacked/resources/app.asar "release/LowerTale-$v-Windows-x64-Electron-$e.asar"
       - uses: actions/upload-artifact@v4
         with:
           name: lowertale-${{ matrix.label }}
@@ -61,7 +70,9 @@ jobs:
           fi
           test -f "release/LowerTale-$v-Windows-x64-Setup.exe"
           test -f "release/LowerTale-$v-x86_64.AppImage"
+          e=$(node -p "require('./package.json').devDependencies.electron")
+          test -f "release/LowerTale-$v-Windows-x64-Electron-$e.asar"
           zip -qr "release/LowerTale-$v-HTML-source.zip" app
           cp "release/LowerTale-$v-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe"
           cp "release/LowerTale-$v-x86_64.AppImage" "release/LowerTale-$v-TEST-x86_64.AppImage"
-          gh release create "v$v" "release/LowerTale-$v-Windows-x64-Setup.exe" "release/LowerTale-$v-x86_64.AppImage" "release/LowerTale-$v-HTML-source.zip" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" --target "$GITHUB_SHA" --title "LowerTale $v — релиз" --notes "С третьей главы доступен альтернативный путь через усиленного босса на время без обязательных узлов, сцен и контуров. Пропущенные задания остаются доступными. Предел уровня героя и каждого улучшения поезда растёт на 5 за открытую главу; опыт сохраняется. Перед обновлением экспортируйте сохранение. Оба игрока в кооперативе должны обновиться. Файлы TEST идентичны релизным."
+          gh release create "v$v" "release/LowerTale-$v-Windows-x64-Setup.exe" "release/LowerTale-$v-Windows-x64-Electron-$e.asar" "release/LowerTale-$v-x86_64.AppImage" "release/LowerTale-$v-HTML-source.zip" "release/LowerTale-$v-TEST-Windows-x64-Setup.exe" "release/LowerTale-$v-TEST-x86_64.AppImage" --target "$GITHUB_SHA" --title "LowerTale $v — релиз" --notes "Для обычного прохождения главы нужны цель главы и шесть главных сцен/контуров в комнатах 02–07; с третьей главы вместо них доступен усиленный босс. Добавлена кнопка выхода. Начиная с 3.16 Windows и Linux загружают обновления в фоне и применяют их после сохранения и перезапуска без установщика. При переходе с 3.15 в Windows ещё нужен прежний установщик. Экспортируйте сохранение перед обновлением. Для кооператива оба игрока должны обновиться. Файлы TEST идентичны релизным."
