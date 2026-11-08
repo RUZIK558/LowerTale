@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self' file: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file:; media-src 'self' data:; connect-src 'none'"><title>LowerTale: Full version</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="unique33.css"><link rel="stylesheet" href="classic-gui.css"><link rel="stylesheet" href="immersive35.css"><link rel="stylesheet" href="hud36.css"></head>
+<body>
+<main id="app">
+<section id="title" class="screen">
+ <div class="title-art"></div><div class="title-shade"></div>
+ <div class="title-content"><div class="eyebrow">ТРИДЦАТЬ СТАНЦИЙ ДО ОТКРЫТОГО МОРЯ</div><h1>LOWER<span>TALE</span><small>FULL VERSION</small></h1><p class="tagline">Последний поезд</p><p class="title-copy">Твоя сестра держит сердце живого мира.<br>Успей привезти ей не героя — союзников.</p>
+ <nav class="title-menu" aria-label="Главное меню">
+ <button data-action="continue" id="continue">Продолжить <span>↵</span></button>
+ <button data-action="new">Новая история <span>01—30</span></button>
+ <button data-action="archives">Первые истории <span>I + II</span></button>
+ <button data-action="endings">Галерея концовок <span id="ending-count">0 / 6</span></button>
+ <button data-action="fullscreen">Полный экран <span>F</span></button>
+ <button data-action="settings">Настройки и управление <span>⚙</span></button>
+ <button data-action="updates">Поиск обновлений <span>↻</span></button>
+ </nav></div>
+ <div class="title-foot"><span>♥ Не всякая дорога должна вести к трону.</span><span>v3.6.0 · ТЕСТ · все главы открыты</span></div>
+</section>
+<section id="game" class="screen hidden">
+ <header id="game-head"><div><span id="chapter-num">01 / 30</span><strong id="chapter-title"></strong></div><nav class="head-actions"><button data-action="trials">Испытания</button><button data-action="pause" aria-label="Открыть меню">Меню <kbd>Esc</kbd></button></nav></header>
+ <div id="view"><canvas id="world" width="960" height="540" tabindex="0" aria-label="Игровой мир. Стрелки или WASD — движение, Z — взаимодействие."></canvas><div id="room-title"></div><div id="prompt" class="hidden"></div><div id="toast" role="status"></div></div>
+ <footer id="hud"><div class="health"><span>♥</span><div><small>ЖИЗНЬ</small><strong id="hp-label"></strong><div id="hp-bar"><i></i></div></div></div><div class="hud-info"><div id="progress36" aria-label="Ресурсы и прогресс"></div><div id="objective"></div><div id="trial36" class="hidden" aria-live="polite"></div></div><nav class="hud-actions"><button data-action="hint">Подсказка</button><button data-action="journal">Журнал</button><button data-action="map">Карта</button><button data-action="bag">Сумка</button></nav></footer>
+ <div id="ability-line" class="world-keys"></div><div class="world-keys">WASD / ←↑↓→ · шаг &nbsp;&nbsp; Shift · бег · Пробел · рывок &nbsp;&nbsp; Z / Enter · взаимодействие &nbsp;&nbsp; F / F11 · экран &nbsp;&nbsp; M · звук</div>
+</section>
+<div id="modal" class="hidden"><section id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title"><div id="panel-head"><span id="panel-kicker"></span><button id="panel-close" aria-label="Закрыть">×</button></div><h2 id="panel-title"></h2><div id="panel-body"></div><div id="panel-actions"></div></section></div>
+<div id="dialogue" class="hidden" role="dialog" aria-modal="true" aria-label="Диалог"><div class="dialog-inner"><div id="portrait">✦</div><div class="dialog-content"><div id="speaker"></div><p id="dialog-text"></p><div id="dialog-options"></div><button id="dialog-next">Дальше <kbd>Z / Enter</kbd></button><small id="dialog-count"></small></div></div></div>
+</main>
+<script src="content.js"></script><script src="audio.js"></script><script src="game.js"></script><script src="sprites.js"></script><script src="puzzles.js"></script><script src="battle.js"></script><script src="hints.js"></script><script src="ui.js"></script><script src="missions.js"></script><script src="campaign.js"></script><script src="bosses.js"></script>
+<script src="contours.js"></script><script src="world-fixes.js"></script>
+<script src="release32.js"></script><script src="unique33.js"></script>
+<script src="puzzles34.js"></script><script src="classic-gui.js"></script><script src="game36.js"></script><script src="updates36.js"></script>
+</body></html>

@@ -1,0 +1,9 @@
+/* Classic 3.1 presentation, retaining scrollable task bodies and window scaling. */
+:root{--bg:#090c17;--surface:#121725;--line:#374054;--text:#edf0f7;--muted:#a2abc0;--gold:#edcf88;--cyan:#8ed4c4}
+#panel{display:flex;flex-direction:column;width:860px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:hidden;padding:24px 32px 20px;background:#111725;border:1px solid #536076;border-radius:0;box-shadow:0 24px 90px #0008}
+#panel-head,#panel-title{flex:none}#panel-body{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#536076 #111725;padding-right:5px}
+#panel-actions{position:static;flex:none;bottom:auto;padding:0;border:0;margin-top:22px;background:#111725;gap:10px}#panel-close{border:0;border-radius:0;background:none;box-shadow:none}
+.u-tile{border-radius:0!important;box-shadow:none;transition:background .15s,border-color .15s}.u-tile:hover{transform:none;box-shadow:none}.u-tile.on{background:#344458;color:#f1deac;border-color:#a1b7c8}.u-clues{border-radius:0;background:#182536;border-color:#456073}.u-story{background:none;color:#c3d2df;border-color:#edcf88}.u-cards input{border-radius:0;background:#090e1c;border-color:#536076;color:var(--gold)}.u-grid .u-fixed{box-shadow:none;border-color:#a8c3d5}.u-network{border-radius:0}
+.task-mode,#route-status,#journey-meters,#goal-caption{display:none!important}#goal-card{display:contents}
+@media(max-width:700px){#modal{padding:8px}#panel{max-width:100%;max-height:calc(100dvh - 16px);padding:15px}#panel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:12px}#panel-actions button{font-size:11px;min-height:38px;padding:8px}#panel-body{padding-right:2px}.u-cards{gap:6px}.u-grid{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.u-tile{transition:none}}

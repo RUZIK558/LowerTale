@@ -1,0 +1,13 @@
+/* compact world-overlay status, no permanent bars */
+#game #hud{max-width:min(640px,70vw);align-items:flex-start;gap:13px;padding:7px 10px}
+#hud .health{min-width:108px}#hud .hud-info{min-width:0;display:flex;flex-direction:column;gap:3px}
+#progress36{color:#f1dfab;font-size:11px;line-height:1.4;display:flex;gap:11px;flex-wrap:wrap}
+#progress36 b{color:#fff2cf}#hud #objective{max-width:490px;font-size:10px;line-height:1.3}
+#trial36{font-size:11px;color:#a9e4d4}#trial36.urgent{color:#ffb2aa}
+.trial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:14px 0}.trial-grid button{text-align:left}.trial-grid small{display:block;color:#b5c4d1;margin-top:5px;font-size:11px}.trial-dials{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}.trial-dials button{min-width:84px}.trial-timer{color:#f2d396;font-weight:bold}
+@media(max-width:700px){#game #hud{max-width:calc(100% - 12px);top:44px;gap:6px}#hud #objective{display:block;font-size:9px}#progress36{font-size:10px;gap:6px}#hud .health{min-width:96px}#room-title{display:none}}
+
+#game-head .head-actions{display:flex;gap:6px}
+#game-head>div{max-width:calc(100% - 260px)}
+#game.battle-active [data-action="trials"]{display:none}
+@media(max-width:700px){#game-head>div{max-width:calc(100% - 180px)}#game-head [data-action="trials"]{font-size:10px}}
