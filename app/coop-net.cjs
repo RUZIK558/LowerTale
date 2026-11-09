@@ -2,7 +2,7 @@
 // Direct two-player TCP transport. The invitation secret never crosses the wire;
 // all game packets are authenticated and encrypted with AES-256-GCM.
 const net=require('net'),crypto=require('crypto'),os=require('os');
-const MAX=260000,VERSION='3.16.0';
+const MAX=260000,VERSION='3.17.0';
 function keyFor(code){return crypto.createHash('sha256').update('LowerTale-coop-1:'+code).digest()}
 function pack(key,seq,msg){const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',key,iv),body=Buffer.from(JSON.stringify({seq,msg})),encrypted=Buffer.concat([cipher.update(body),cipher.final()]);return Buffer.concat([iv,cipher.getAuthTag(),encrypted]).toString('base64')+'\n'}
 function unpack(key,line){const b=Buffer.from(line,'base64');if(b.length<29||b.length>MAX)throw Error('bad packet');const decipher=crypto.createDecipheriv('aes-256-gcm',key,b.subarray(0,12));decipher.setAuthTag(b.subarray(12,28));return JSON.parse(Buffer.concat([decipher.update(b.subarray(28)),decipher.final()]).toString('utf8'))}
