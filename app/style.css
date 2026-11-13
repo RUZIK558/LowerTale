@@ -29,3 +29,10 @@ html,body{width:100%;height:100%;overflow:hidden}#app{width:100%;height:100%;max
 .c-grid{width:min(100%,38vh);max-width:360px}.c-twins .c-grid{width:auto;min-width:0}#panel-actions{position:sticky;bottom:-28px;background:#111725;z-index:3;padding:12px 0 8px;border-top:1px solid #374054}@media(max-height:760px){#panel-actions{bottom:-16px}}@media(max-width:700px){#panel-actions{bottom:-15px}.c-grid{width:min(100%,36vh)}}
 
 .title-content{max-height:calc(100dvh - 30px);overflow-y:auto}
+
+/* 3.18: Title screen credits */
+.title-credits{margin-top:24px;padding:16px;background:rgba(12,16,29,.5);border-left:3px solid var(--gold);max-width:405px}
+.credit-line{display:flex;gap:12px;margin-bottom:8px;font-size:13px;color:#b4bdd0}
+.credit-role{color:var(--muted);min-width:140px}
+.credit-name{color:var(--gold);font-weight:bold}
+@media(max-width:700px){.title-credits{padding:12px;max-width:100%}.credit-line{flex-direction:column;gap:4px;font-size:12px}.credit-role{min-width:auto}}
