@@ -1,0 +1,26 @@
+/* Cinematic framing uses the game's existing artwork and pixel sprites. */
+#dialogue.cinematic49{position:fixed;inset:0;padding:0;background:#030712;overflow:hidden;align-items:initial;z-index:35}
+#cinema-stage49{display:none}
+.cinematic49 #cinema-stage49{display:block;position:absolute;inset:0;overflow:hidden;background:#07101b;pointer-events:none}
+.cinema-art49{position:absolute;inset:-3%;background:url(title.jpg) center 45%/cover no-repeat;image-rendering:pixelated;transform:scale(1.04)}
+.cinema-vignette49{position:absolute;inset:0;background:linear-gradient(180deg,#030712d9 0%,#07101b33 34%,#03071142 58%,#030712ee 100%),linear-gradient(90deg,#07101bcc,#07101b22 45%,#07101b88)}
+.cinematic49[data-scene="4"] .cinema-vignette49,.cinematic49[data-scene="15"] .cinema-vignette49{background:linear-gradient(180deg,#0b0714e8,#271a3e55 44%,#030712ed),linear-gradient(90deg,#100b23a8,transparent)}
+.cinematic49[data-scene="9"] .cinema-vignette49,.cinematic49[data-scene="20"] .cinema-vignette49{background:linear-gradient(180deg,#020d1bea,#16334a70 44%,#030712ed),linear-gradient(90deg,#051825a8,transparent)}
+.cinema-header49{position:absolute;top:7%;left:7%;right:22%;display:flex;flex-direction:column;gap:8px;text-shadow:0 2px 12px #030712}
+.cinema-kicker49{font-size:12px;letter-spacing:.18em;color:#d7c58d}
+.cinema-title49{font-size:clamp(23px,3vw,42px);font-weight:400;line-height:1.2;color:#fff1d2}
+.cinema-figures49{position:absolute;left:9%;right:9%;bottom:33%;display:flex;justify-content:space-between;align-items:end}
+.cinema-figure49{display:flex;flex-direction:column;align-items:center;gap:3px;color:#f3dfb6;font-size:12px;letter-spacing:.12em;text-shadow:0 2px 8px #000}
+.cinema-figure49 canvas{width:108px;height:120px;image-rendering:pixelated;filter:drop-shadow(0 4px 2px #05070b)}
+.cinema-other49{transition:opacity .25s}.cinema-quiet49{opacity:0}
+.cinematic49 .dialog-inner{position:absolute;left:6%;right:6%;bottom:5%;width:auto;min-height:185px;max-height:32%;padding:18px 24px;background:#080e1af2;border:1px solid #91a6b7;box-shadow:0 16px 48px #000a}
+.cinematic49 #dialog-text{font-size:clamp(15px,1.35vw,19px);line-height:1.55;min-height:60px}
+.cinematic49 #speaker{color:#f0d58c}
+#cinema-skip49{display:none}
+.cinematic49 #cinema-skip49{display:block;position:absolute;top:5%;right:5%;z-index:2;background:#080f1acb;border-color:#8c9ba9;color:#f4e6c8;font-size:13px}
+.cinema-motion49 .cinema-art49{animation:cinema-drift49 24s ease-in-out infinite alternate}
+.cinema-motion49 .cinema-figure49 canvas{animation:cinema-breathe49 3s ease-in-out infinite}
+@keyframes cinema-drift49{from{transform:scale(1.04) translateX(-.8%)}to{transform:scale(1.09) translateX(.8%)}}
+@keyframes cinema-breathe49{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.cinema-motion49 .cinema-art49,.cinema-motion49 .cinema-figure49 canvas{animation:none}.cinema-other49{transition:none}}
+@media(max-width:700px){.cinema-header49{top:5%;left:5%;right:36%}.cinema-kicker49{font-size:10px;letter-spacing:.06em}.cinema-title49{font-size:22px}.cinema-figures49{bottom:43%;left:5%;right:5%}.cinema-figure49 canvas{width:72px;height:80px}.cinematic49 .dialog-inner{left:3%;right:3%;bottom:3%;max-height:39%;min-height:190px;padding:14px;gap:10px}.cinematic49 #dialog-text{font-size:15px;line-height:1.5}.cinematic49 #cinema-skip49{top:4%;right:3%;font-size:12px;padding:6px 9px}.cinematic49 #portrait{width:36px;height:36px}}
