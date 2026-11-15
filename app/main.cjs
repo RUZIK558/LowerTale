@@ -14,7 +14,6 @@ app.whenReady().then(()=>{
  win.webContents.setWindowOpenHandler(()=>({action:'deny'}));
  win.webContents.on('will-navigate',(e,url)=>{if(!url.startsWith(pathToFileURL(__dirname+path.sep).href))e.preventDefault()});
  updater=require('./updater.cjs').installIPC({ipcMain,app,win,shell});
- require('./coop-net.cjs').installIPC(ipcMain,win);
  win.loadFile('index.html');
  const failure=path.join(app.getPath('userData'),'update-failed.txt');try{const fs=require('fs');if(fs.existsSync(failure)){const details=fs.readFileSync(failure,'utf8').slice(0,1000);fs.unlinkSync(failure);dialog.showMessageBox(win,{type:'warning',message:'Обновление не установлено. Старая версия сохранена.',detail:details})}}catch(_){}
  win.on('close',e=>{if(app.closing)return;e.preventDefault();if(closePending)return;closePending=true;win.webContents.send('request-save-close',{update:manualRestart});closeTimer=setTimeout(()=>closeFailed('Игра не подтвердила сохранение.'),15000)});
