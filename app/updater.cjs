@@ -27,7 +27,10 @@ $ErrorActionPreference='Stop'
 $c=Get-Content -LiteralPath $Config -Raw | ConvertFrom-Json
 try {
   try { Wait-Process -Id $c.pid -Timeout 45 -ErrorAction Stop } catch { if (Get-Process -Id $c.pid -ErrorAction SilentlyContinue) { throw 'Игра не завершилась вовремя.' } }
-  if ((Get-FileHash -Algorithm SHA256 -LiteralPath $c.source).Hash.ToLower() -ne $c.hash) { throw 'Контрольная сумма не совпала.' }
+  $sha=[System.Security.Cryptography.SHA256]::Create()
+  $stream=[System.IO.File]::OpenRead($c.source)
+  try { $actual=([System.BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-','').ToLowerInvariant() } finally { $stream.Dispose(); $sha.Dispose() }
+  if ($actual -ne $c.hash) { throw 'Контрольная сумма не совпала.' }
   $swapped=$false
   for ($i=0; $i -lt 120; $i++) { try { [System.IO.File]::Replace($c.source,$c.target,$c.backup,$true); $swapped=$true; break } catch { Start-Sleep -Milliseconds 500 } }
   if (-not $swapped) { throw 'Не удалось заменить файл игры; проверьте права доступа.' }
@@ -37,7 +40,7 @@ try {
   $_.Exception.Message | Set-Content -LiteralPath $c.failure -Encoding UTF8
   if ($c.restart) { Start-Process -FilePath $c.exe -WorkingDirectory (Split-Path -Parent $c.exe) -ErrorAction SilentlyContinue }
 } finally { Remove-Item -LiteralPath $Config -Force -ErrorAction SilentlyContinue; Remove-Item -LiteralPath $MyInvocation.MyCommand.Path -Force -ErrorAction SilentlyContinue }
-`;fs.writeFileSync(script,'\ufeff'+ps,{flag:'wx',mode:0o600});try{fs.writeFileSync(config,JSON.stringify({pid:process.pid,source:adjacent,target,backup,hash:r.asset.hash,restart:!!options.restart,exe:portable||process.execPath,failure}),{flag:'wx',mode:0o600});await new Promise((resolve,reject)=>{const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-WindowStyle','Hidden','-File',script,config],{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve()})})}catch(e){try{fs.unlinkSync(script)}catch{}try{fs.unlinkSync(config)}catch{}try{fs.unlinkSync(adjacent)}catch{}throw e}try{fs.unlinkSync(r.file)}catch{}staged=null;return{ok:true}}throw Error('Обновление не поддерживается.') }catch(e){return{ok:false,message:e.message}}}
+`;fs.writeFileSync(script,'\ufeff'+ps,{flag:'wx',mode:0o600});try{fs.writeFileSync(config,JSON.stringify({pid:process.pid,source:adjacent,target,backup,hash:r.asset.hash,restart:!!options.restart,exe:portable||process.execPath,failure}),{flag:'wx',mode:0o600});await new Promise((resolve,reject)=>{const child=spawn('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',script,config],{detached:true,stdio:'ignore',windowsHide:true});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve()})})}catch(e){try{fs.unlinkSync(script)}catch{}try{fs.unlinkSync(config)}catch{}try{fs.unlinkSync(adjacent)}catch{}throw e}try{fs.unlinkSync(r.file)}catch{}staged=null;return{ok:true}}throw Error('Обновление не поддерживается.') }catch(e){return{ok:false,message:e.message}}}
  ipcMain.handle('update-open-releases',async()=>{await shell.openExternal(`https://github.com/${OWNER}/${REPO}/releases`)});return {applyStaged,hasStaged:()=>!!staged,hasAutoStaged:()=>!!staged?.auto}}
 
 module.exports={version,newer,trusted,assetFor,bugfixOnly,check,download,installIPC};
